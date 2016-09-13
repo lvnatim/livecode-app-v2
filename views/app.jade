@@ -26,7 +26,7 @@ block content
             each doc in docs
               tr.document(data-document-id= doc.id)
                 td= doc.Owner.username
-                td= doc.name
+                td.documentTitle(contentEditable="true")= doc.name
                 td= doc.language
                 td= doc.createdAt
                 td= doc.updatedAt
