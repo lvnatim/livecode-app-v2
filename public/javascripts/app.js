@@ -40,6 +40,32 @@ $(".close-block-document").on('click', function(){
   stopSocket();
 });
 
+$(".profileDocumentTitle").on("keypress", function(e){
+  var thisDoc = $(this);
+  var docId = thisDoc.parent().data("document-id");
+  // console.log(docId)
+  var newTitle = thisDoc.html();
+  if(e.keyCode === 13){
+    e.preventDefault();
+    thisDoc.next().focus();
+    $.ajax({
+      method: 'POST',
+      url: '/app/rename/',
+      data: {
+        docId: docId,
+        newTitle: newTitle
+      },
+      success: function(data){
+        console.log('Successfully posted');
+        thisDoc.blur().next().focus();
+        return false;
+      }
+    })
+  }else{
+    console.log("Nothing registered");
+  }
+});
+
 function createDocumentRow(doc){
   $newRow = $('<tr>')
     .attr("data-document-id", doc.id)
