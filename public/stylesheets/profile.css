@@ -1,0 +1,21 @@
+.block-profile {
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+}
+
+.profile-details{
+  background-color: black;
+  height: 100px;
+}
+.profile-documents{
+  background-color: grey;
+  height: 100px;
+}
+.profile-popular{
+  background-color: black;
+  height: 100px;
+}

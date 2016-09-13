@@ -1,0 +1,81 @@
+.chat {
+  border: 1px solid grey;
+  height: 50%;
+  position: absolute;
+  bottom: 5%;
+  right: 0;
+  left: 0;
+}
+
+.chat-comments{
+  margin: 10px;
+  overflow: scroll;
+  width: 100%;
+  height: 95%;
+}
+
+.chat-comment {
+  background-color: white;
+  display: block;
+}
+
+.chat-input{
+  border: 1px solid grey;
+  font-size: 1.5rem;
+  height: 5%;
+  width: 100%;
+}
+
+.chat-input:focus {
+  outline: none;
+  box-shadow: 2px 2px 3px blue;
+}
+
+#editor {
+  position: absolute;
+  top: 8%;
+  left: 0;
+  right: 30%;
+  bottom: 0;
+  z-index: -1;
+}
+
+.editorList {
+  list-style-type: none;
+}
+
+.editorList > li {
+  margin: 0px;
+}
+
+.foundUsers {
+  list-style-type: none;
+}
+
+.foundUser:hover {
+  background-color: black;
+}
+
+.sidebar {
+  padding: 12px;
+  position: absolute;
+  top: 5%;
+  left: 70%;
+  right: 0%;
+  bottom: 0;
+  z-index: -1;
+}
+
+.sidebar > h4 {
+  margin-top: 16px;
+}
+
+
+
+.toolbar-editor {
+  top:0;
+  right: 0;
+  left: 0;
+  bottom: 95%;
+  z-index: -1;
+}

@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  .app
+  
+    .block.block-document
+      .toolbar.toolbar-document
+        div.button-new-document
+          p= "New"
+        div.button-show-profile
+          p= "Profile"
+        div.button-browse-users
+          p= "Users"
+        div.button-browse-documents
+          p= "Documents"
+      div.table-container
+        table
+          thead
+            tr
+              td= "Owner"
+              td= "Name"
+              td= "Language"
+              td= "Created At"
+              td= "Last Updated"
+          tbody.documents
+            each doc in docs
+              tr.document(data-document-id= doc.id)
+                td= doc.Owner.username
+                td= doc.name
+                td= doc.language
+                td= doc.createdAt
+                td= doc.updatedAt
+                td.button-load-document= "open"
+                td.button-delete-document= "delete"
+
+    .block.block-editor
+      .toolbar.toolbar-editor
+        div.close-block-document
+          p= "<"
+        div.button-save-document
+          p="Save"
+      #editor
+      .sidebar
+        h4= "Info"
+        p= "Title: "
+          span.documentTitle
+        p= "Owner: "
+          span.documentOwner
+        p= "Language: "
+          span.documentLanguage
+        p= "Created on: "
+          span.documentCreatedAt
+        p= "Last updated: "
+          span.documentUpdatedAt
+
+        h4= "Editors"
+        ul.editorList
+        input.searchUsers(placeholder="Search Users")
+        ul.foundUsers
+
+        .chat
+          .chat-comments
+          input.chat-input(placeholder="Enter a chat comment here")
+
+    .block.block-profile
+      .toolbar.toolbar-profile
+        div.close-block-profile
+          p= "v"
+      .row
+        .profile-details.four.columns
+        .profile-documents.eight.columns
+
+  script(src="https://cdn.socket.io/socket.io-1.4.5.js")
+  script(src="/javascripts/socket.js")
+  script(src="/plugins/ace-builds/src/ace.js")
+  script(src="/javascripts/user_search.js")
+  script(src="/javascripts/app.js")
+  script(src="/javascripts/editor.js")
+  script(src="/javascripts/profile.js")

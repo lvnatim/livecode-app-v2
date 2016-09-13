@@ -1,0 +1,164 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app').app;
+var session = require('../app').session;
+var sharedsession = require("express-socket.io-session");
+var db = require("../models/index");
+
+var debug = require('debug')('livecode-app:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+var io = require("socket.io")(server);
+
+io.use(sharedsession(session));
+
+io.on("connection", function(socket) {
+
+  socket.on('join', function(){
+    var userId = socket.handshake.session.user.id;
+    var roomId = socket.handshake.session.activeDocId;
+    db.User
+      .findById(userId)
+      .then(user=>{
+        db.Document
+          .findById(roomId)
+          .then(doc=>{
+            doc
+              .hasUser(user)
+              .then(result=>{
+                if(result){
+                  socket.broadcast.to(roomId).emit('SAVE');
+                  socket.emit("START");
+                  socket.join(roomId);
+                  socket.handshake.session.can_write = true;
+                  console.log("User join read/write for room", roomId);
+                } else {
+                  socket.broadcast.to(roomId).emit('SAVE');
+                  socket.join(roomId);
+                  socket.handshake.session.can_write = false;
+                  console.log("User joined read only for room", roomId);
+                }
+              });
+          });
+      });
+  });
+
+  socket.on('edit',function(data){
+    var room = socket.handshake.session.activeDocId;
+    if(socket.handshake.session.can_write === true){
+      socket.broadcast.to(room).emit('EDIT', data.event);
+    };
+  });
+
+  socket.on('chat', text=>{
+    var room = socket.handshake.session.activeDocId;
+    var user = socket.handshake.session.user;
+    if(user){
+      io.to(room).emit('CHAT', {username: user.username, text: text});
+      console.log("emitting as user");
+    } else {
+      io.to(room).emit('CHAT', {username: 'anonymous', text: text});
+      console.log("emitting as anonymous");
+    }
+  });
+
+  socket.on('RELOAD', function(data){
+    var room = socket.handshake.session.activeDocId;
+    if(socket.handshake.session.can_write === true){
+      socket.broadcast.to(room).emit('RELOAD');
+    };
+  });
+
+  socket.on('disconnect', function(data){
+    if (socket.handshake.session.can_write) {
+      delete socket.handshake.session.can_write;
+    }
+  });
+
+
+})
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

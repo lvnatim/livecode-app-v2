@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .hero
+    .logo
+      h1= "LiveCode"
+    .filter
+    #hero-editor
+
+  .about
+    .blurb.container
+      .blurb-img.six.columns
+        img
+      .blurb-text.six.columns
+        h3= "What is LiveCode?"
+        p= "LiveCode is a collaborative coding project designed to bring developers of all levels together to learn and build."
+    .blurb.container
+      .blurb-text.six.columns
+        h3= "How do I use it?"
+        p= "Create an account and get started immediately!"
+      .blurb-img.six.columns
+
+  script(src="/plugins/ace-builds/src-min-noconflict/ace.js")
+  script(src="/javascripts/home.js")
