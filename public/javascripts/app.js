@@ -35,6 +35,19 @@ $("table").on('click', '.button-load-document', function(){
   });
 });
 
+//load document from profile page
+$("table").on('click', '.button-load-document-profile', function(){
+  var docId = $(this).parent().data('document-id');
+  console.log(docId)
+  $(".block-document").animate({"right":"100%","left":"-100%"});
+  $(".block-profile").animate({"top":"100%","bottom":"-100%"});
+  $.get({
+    url: "/api/documents",
+    data: {docId: docId},
+    success: loadDocument
+  });
+});
+
 $(".close-block-document").on('click', function(){
   $(".block-document").animate({"right":"0%","left":"0%"})
   stopSocket();
