@@ -40,15 +40,19 @@ $(".close-block-document").on('click', function(){
   stopSocket();
 });
 $(".githublink").on('click', function(){
-  var fileName = $(".mainDocumentTitle").html();
-  var content = editor.getValue();  
+  var githubLink = $(".githublink");
+  var originalText = githubLink.text();
+  var fileName = $(".documentTitle").html();
+  var content = editor.getValue(); 
   $.ajax({
     method: 'get',
     url: '/app/auth/github',
     data: {fileName: fileName, content: content},
     success: function(){
-      $(".githublink").text('New Gist file created! Click to create another');
-
+      githubLink.text('New Gist file created! Click to create another');
+      setTimeout(function(){
+        githubLink.text(originalText);
+      }, 5000);
     },
     error: function(){
       console.log('failed to do ajax request')

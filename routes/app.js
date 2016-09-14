@@ -66,15 +66,15 @@ router.get('/auth/github', function(req, res, next){
   
   github.authenticate({
     type: "basic",
-    username: '*****',
-    password: '*****'
+    username: '*',
+    password: '*'
     });
   
   github.authorization.create({
     scopes:["user","gist"],
     note: "LiveCode post to Gist",
-    client_id: INPUT_CLIENT_ID,
-    client_secret: INPUT CLIENT SECRET,
+    client_id: '*',
+    client_secret: '*',
     headers: {
       "user-agent": "LiveCode"
     }
