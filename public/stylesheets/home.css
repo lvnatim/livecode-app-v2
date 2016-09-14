@@ -1,0 +1,61 @@
+.about {
+  width: 100%;
+}
+
+.blurb {
+  margin-top: 80px;
+}
+
+.blurb {
+  font-family: Futura;
+}
+
+.hero {
+  align-items: center;
+  border: 2px solid black;
+  display: flex;
+  height: 800px;
+  margin-top: 59px;
+  width: 100%;
+}
+
+.hero > .logo {
+  color: white;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 5;
+}
+
+.hero > .filter {
+  background-color: black;
+  height: 800px;
+  opacity: 0.9;
+  position: absolute;
+  width: 100%;
+}
+
+.hero > #hero-editor {
+  color: #00FF00;
+  height: 800px;
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
+.registerForm {
+  padding: 5px 15px 5px 15px;
+  position: absolute;
+  right: 0%;
+  z-index: 10;
+}
+
+.registerForm.closed {
+  bottom: 200%;
+}
+
+.registerForm > input {
+  display: block;
+  margin: 8px 0px;
+  width: 124px;
+}

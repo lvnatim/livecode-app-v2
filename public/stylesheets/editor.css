@@ -1,43 +1,69 @@
+.block-editor {
+  background-color: white;
+  z-index: 10;
+}
+
 .chat {
-  border: 1px solid grey;
+  border: 2px solid grey;
   height: 50%;
   position: absolute;
-  bottom: 5%;
+  bottom: 2.5%;
   right: 0;
   left: 0;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .chat-comments{
-  margin: 10px;
-  overflow: scroll;
+  word-wrap: break-word;
   width: 100%;
-  height: 95%;
+  height: 92.5%;
 }
 
 .chat-comment {
-  background-color: white;
+  background-color: grey;
+  border: 1px solid grey;
   display: block;
+  max-width: inherit;
 }
 
 .chat-input{
   border: 1px solid grey;
   font-size: 1.5rem;
-  height: 5%;
-  width: 100%;
+  height: 7.5%;
+  width: 80%;
 }
 
-.chat-input:focus {
-  outline: none;
-  box-shadow: 2px 2px 3px blue;
+.chat-submit {
+  width: 20%;
 }
 
 #editor {
+  overflow: scroll;
   position: absolute;
-  top: 8%;
+  top: 5%;
   left: 0;
   right: 30%;
   bottom: 0;
   z-index: -1;
+}
+
+.editors {
+  background-color: brown;
+  border: 1px solid black;
+  padding: 10px;
+  position: absolute;
+  height: 400px;
+  width: 250px;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -125px;
+  transition: margin 1s;
+}
+
+.editors.hidden {
+  margin-left: 2000px;
 }
 
 .editorList {
@@ -56,6 +82,12 @@
   background-color: black;
 }
 
+.searchUsers {
+  border-radius: 1rem;
+  height: 3rem;
+  width: 100%;
+}
+
 .sidebar {
   padding: 12px;
   position: absolute;
@@ -70,12 +102,6 @@
   margin-top: 16px;
 }
 
-
-
 .toolbar-editor {
-  top:0;
-  right: 0;
-  left: 0;
-  bottom: 95%;
-  z-index: -1;
+  z-index: 10;
 }

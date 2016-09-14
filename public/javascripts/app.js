@@ -1,4 +1,4 @@
-$(".button-new-document").on('click', function(){
+$(".button-new-mydoc").on('click', function(){
   $.get({
     url: '/api/documents/new',
     success: function(data){
@@ -8,7 +8,21 @@ $(".button-new-document").on('click', function(){
 });
 
 $('.button-show-profile').on('click', function(){
-  $('.block-profile').animate({"top":"0", "bottom":"0"});
+  $('.block-profile').toggleClass('hidden');
+
+  $.get({
+    url: 'api/users/profile',
+    success: loadProfile
+  });
+
+});
+
+$('.button-browse-users').on('click', function(){
+  $('.block-users').toggleClass('hidden');
+});
+
+$('.button-browse-documents').on('click', function(){
+  $('.block-docs').toggleClass('hidden');
 });
 
 $("table").on('click', ".button-delete-document", function(){
@@ -27,7 +41,7 @@ $("table").on('click', ".button-delete-document", function(){
 
 $("table").on('click', '.button-load-document', function(){
   var docId = $(this).parent().data('documentId');
-  $(".block-document").animate({"right":"100%","left":"-100%"});
+  $('.block-editor').toggleClass("hidden");
   $.get({
     url: "/api/documents",
     data: {docId: docId},
@@ -49,8 +63,66 @@ $("table").on('click', '.button-load-document-profile', function(){
 });
 
 $(".close-block-document").on('click', function(){
-  $(".block-document").animate({"right":"0%","left":"0%"})
+  $('.block-editor').toggleClass("hidden");
   stopSocket();
+});
+
+$('.close-block-users').on('click', function(){
+  $('.block-users').toggleClass('hidden');
+});
+
+$('.close-block-docs').on('click', function(){
+  $('.block-docs').toggleClass('hidden');
+});
+
+$(".githublink").on('click', function(){
+  var githubLink = $(".githublink");
+  var originalText = githubLink.text();
+  var fileName = $(".documentTitle").html();
+  var content = editor.getValue(); 
+  $.ajax({
+    method: 'get',
+    url: '/app/auth/github',
+    data: {fileName: fileName, content: content},
+    success: function(){
+      githubLink.text('New Gist created! Click to create another');
+      setTimeout(function(){
+        githubLink.text(originalText);
+      }, 5000);
+    },
+    error: function(){
+      console.log('failed to do ajax request')
+      githubLink.text('Something went wrong. Try again');
+      setTimeout(function(){
+        githubLink.text(originalText);
+      }, 5000);
+    }
+  });
+});
+
+$(".profileDocumentTitle").on("keypress", function(e){
+  var thisDoc = $(this);
+  var docId = thisDoc.parent().data("document-id");
+  var newTitle = thisDoc.html();
+  if(e.keyCode === 13){
+    e.preventDefault();
+    thisDoc.next().focus();
+    $.ajax({
+      method: 'POST',
+      url: '/app/rename/',
+      data: {
+        docId: docId,
+        newTitle: newTitle
+      },
+      success: function(data){
+        console.log('Successfully posted');
+        thisDoc.blur().next().focus();
+        return false;
+      }
+    })
+  }else{
+    console.log("Nothing registered");
+  }
 });
 
 function createDocumentRow(doc){

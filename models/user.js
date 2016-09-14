@@ -42,6 +42,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       //associate models here
       associate: function(models){
+        User.hasOne(models.Profile),
         User.belongsToMany(models.Document, 
           {
             through: {

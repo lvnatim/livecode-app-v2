@@ -2,10 +2,10 @@ extends layout
 
 block content
   .app
-  
-    .block.block-document
-      .toolbar.toolbar-document
-        div.button-new-document
+
+    .block.block-mydocs
+      .toolbar.toolbar-mydocs
+        div.button-new-mydoc
           p= "New"
         div.button-show-profile
           p= "Profile"
@@ -13,7 +13,8 @@ block content
           p= "Users"
         div.button-browse-documents
           p= "Documents"
-      div.table-container
+
+      .block-body.block-body-mydocs
         table
           thead
             tr
@@ -22,63 +23,71 @@ block content
               td= "Language"
               td= "Created At"
               td= "Last Updated"
+              td=""
+              td=""
           tbody.documents
             each doc in docs
               tr.document(data-document-id= doc.id)
                 td= doc.Owner.username
-                td= doc.name
+                td.profileDocumentTitle(contentEditable="true")= doc.name
                 td= doc.language
-                td= doc.createdAt
-                td= doc.updatedAt
+                td= moment(doc.createdAt).format('MMM Do YYYY')
+                td= moment(doc.updatedAt).format('MMM Do YYYY [at] h:mm:ss a')
                 td.button-load-document= "open"
                 td.button-delete-document= "delete"
 
-    .block.block-editor
+    .block.block-editor.hidden
       .toolbar.toolbar-editor
         div.close-block-document
-          p= "<"
+          p= ">"
         div.button-save-document
           p="Save"
+        div.button-open-editor
+          p="Editors"
       #editor
       .sidebar
         h4= "Info"
         p= "Title: "
-          span.documentTitle
+          span.documentTitle(contentEditable="true")
         p= "Owner: "
           span.documentOwner
         p= "Language: "
           span.documentLanguage
         p= "Created on: "
-          span.documentCreatedAt
+          span.created= moment(documentCreatedAt).format('MMM Do YYYY')
         p= "Last updated: "
-          span.documentUpdatedAt
+          span.updated= moment(documentUpdatedAt).format('MMM Do YYYY [at] h:mm:ss a')
+        .chat
+          .chat-comments
+          input.chat-input(placeholder="Enter a chat comment here")
+          div.chat-submit
+        a.button.githublink= "Copy file to a new Gist"
 
-        h4= "Editors"
+      .editors.hidden
+        h4= "Add Editors"
         ul.editorList
         input.searchUsers(placeholder="Search Users")
         ul.foundUsers
 
-        .chat
-          .chat-comments
-          input.chat-input(placeholder="Enter a chat comment here")
-
-    .block.block-profile
+    .block.block-profile.hidden
       .toolbar.toolbar-profile
-        div.close-block-profile
-          p= "v"
-      .row.profile-body
-        .profile-details.four.columns
-          div.profile-image
+          div.close-block-profile
+            p= ">"
+      .block-body.block-body-profile
+        .profile-details
+          .profile-image
             img(src="http://jasonsvoices.com/funnyguy/wp-content/uploads/2016/03/Liam-Neeson.jpg")
           .profile-info
-            h1= "Liam Neeson"
-            h2= "SpecialSkills24"
+            h1.profile-fullname= "Liam Neeson"
+            h2.profile-username= "SpecialSkills24"
+            p.profile-location= "Vancouver"
+            p.profile-email= "liamneeson@willfind.net"
             div.icon-container
               i.fa.fa-map-marker
-              span= "Vancouver"
+              span.profile-location= "Vancouver"
             div.icon-container
               i.fa.fa-envelope-o
-              span= "liamneeson@willfind.net"
+              span.profile-email= "liamneeson@willfind.net"
             div.icon-container
               i.fa.fa-clock-o
               span= "joined 5 years ago"
@@ -88,9 +97,8 @@ block content
             div.icon-container
               i.fa.fa-user
               span= "about me"
-            p= " I don't know who you are. I don't know what you want. If you are looking for ransom, I can tell you I don't have money. But what I do have are a very particular set of skills, skills I have acquired over a very long career. Skills that make me a nightmare for people like you. If you let my daughter go now, that'll be the end of it. I will not look for you, I will not pursue you. But if you don't, I will look for you, I will find you, and I will kill you."
-            p= "more info - hidden"
-        .profile-documents.eight.columns
+            p.profile-bio= " I don't know who you are. I don't know what you want. If you are looking for ransom, I can tell you I don't have money. But what I do have are a very particular set of skills, skills I have acquired over a very long career. Skills that make me a nightmare for people like you. If you let my daughter go now, that'll be the end of it. I will not look for you, I will not pursue you. But if you don't, I will look for you, I will find you, and I will kill you."
+        .profile-table
           .table
             table
               thead
@@ -98,24 +106,37 @@ block content
                 th= "Owner"
                 th= "Name"
                 th= "Language"
-                th= "Created At"
                 th= "Last Updated"
                 th
-              tbody.documents
-                each doc in docs
-                  tr.document(data-document-id= doc.id)
-                    td= doc.Owner.username
-                    td= doc.name
-                    td= doc.language
-                    td= doc.createdAt
-                    td= doc.updatedAt
-                    td.button-load-document-profile= "open"
+              tbody.profile-documents
 
+    .block.block-users.hidden
+      .toolbar.toolbar-users
+        div.close-block-users
+          p= ">"
+      .block-body.block-body-users
+        input.search(placeholder="Search Profiles")
+        .user-profiles
+          .user-profile
+          .user-profile
+          .user-profile
+          .user-profile
+          .user-profile
+          .user-profile
+          .user-profile
+    .block.block-docs.hidden
+      .toolbar.toolbar-docs
+        div.close-block-docs
+          p= ">"
+
+  script(src="/javascripts/profile.js")
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/javascripts/socket.js")
   script(src="/plugins/ace-builds/src/ace.js")
   script(src="/javascripts/user_search.js")
   script(src="/javascripts/app.js")
+
   script(src="/javascripts/editor.js")
-  script(src="/javascripts/profile.js")
   
+  
+

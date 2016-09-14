@@ -1,0 +1,12 @@
+.block-body-mydocs {
+  background-color: white;
+  z-index: 0;
+}
+
+.document:hover {
+  background-color: #33c3f0;
+}
+
+.toolbar-mydocs {
+  z-index: 1;
+}
