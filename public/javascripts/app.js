@@ -39,6 +39,7 @@ $(".close-block-document").on('click', function(){
   $(".block-document").animate({"right":"0%","left":"0%"})
   stopSocket();
 });
+
 $(".githublink").on('click', function(){
   var githubLink = $(".githublink");
   var originalText = githubLink.text();
@@ -49,13 +50,17 @@ $(".githublink").on('click', function(){
     url: '/app/auth/github',
     data: {fileName: fileName, content: content},
     success: function(){
-      githubLink.text('New Gist file created! Click to create another');
+      githubLink.text('New Gist created! Click to create another');
       setTimeout(function(){
         githubLink.text(originalText);
       }, 5000);
     },
     error: function(){
       console.log('failed to do ajax request')
+      githubLink.text('Something went wrong. Try again');
+      setTimeout(function(){
+        githubLink.text(originalText);
+      }, 5000);
     }
   })
 });
@@ -63,7 +68,6 @@ $(".githublink").on('click', function(){
 $(".profileDocumentTitle").on("keypress", function(e){
   var thisDoc = $(this);
   var docId = thisDoc.parent().data("document-id");
-  // console.log(docId)
   var newTitle = thisDoc.html();
   if(e.keyCode === 13){
     e.preventDefault();

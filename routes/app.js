@@ -59,9 +59,9 @@ router.get('/auth/github', function(req, res, next){
     host: "api.github.com",
     headers: {
       "user-agent": "LiveCode"
-    },
-    Promise: require('bluebird'),
-    timeout: 5000
+    }
+    // Promise: require('bluebird'),
+    // timeout: 5000
   });
   
   github.authenticate({
