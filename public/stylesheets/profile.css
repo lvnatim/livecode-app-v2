@@ -31,27 +31,6 @@ table{
   line-height: 0;
 }
 
-.location-icon {
-  background-image: url("/pin1.svg"); 
-}
-
-.mail-icon {
-  background-image: url("/mail1.svg");
-}
-
-.user-icon {
-  background-image: url("/user.svg");
-}
-
-.code-icon {
-  background-image: url("/code.svg");
-}
-
-.clock-icon {
-  background-image: url("/clock2.svg");
-  height: 20px;
-}
-
 .profile-body{
   height: 700px;
 }
