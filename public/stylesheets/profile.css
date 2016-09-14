@@ -1,3 +1,7 @@
+table{
+  margin-right: 15px;
+}
+
 .block-profile {
   background-color: white;
   position: absolute;
@@ -7,24 +11,67 @@
   right: 0;
 }
 
+.icon{
+  background-size: 100% 100%;
+  float: left;
+  margin: 0px;
+  height: 30px;
+  width: 30px;
+}
+
+.icon-container{
+  height: 30px;
+  line-height: 15px;
+}
+
+.icon-container > span{
+  display: inline-block;
+  padding-top: 16px;
+  margin-left: 20px;
+  line-height: 0;
+}
+
+.location-icon {
+  background-image: url("/pin1.svg"); 
+}
+
+.mail-icon {
+  background-image: url("/mail1.svg");
+}
+
+.user-icon {
+  background-image: url("/user.svg");
+}
+
+.code-icon {
+  background-image: url("/code.svg");
+}
+
+.clock-icon {
+  background-image: url("/clock2.svg");
+  height: 20px;
+}
+
 .profile-body{
   height: 700px;
 }
 
 .profile-details{
-  width: 31% !important;
+  /*width: 31% !important;*/
   background-color: white;
   margin-bottom: 15px;
   max-height: 700px;
-  /*margin-left: 15px;*/
 }
 
 .profile-documents{
+    
+}
+
+.table{
   box-sizing: border-box;
   background-color: grey;
-  width: 69% !important;
-  margin-left:0 !important;
-  
+  margin-top: 15px;
+  margin-right: 15px;
 }
 
 .profile-image > img {
@@ -44,6 +91,7 @@
 .profile-info > * {
   color: black;
   margin: 0 15px;
+  vertical-align: middle;
 }
 
 .profile-info > h1{
