@@ -2,7 +2,9 @@ var express = require('express');
 var db = require('../models/index');
 var router = express.Router();
 var moment = require('moment');
+var dotenv = require('dotenv');
 var GitHubApi = require('github');
+
 
 router.get('/', function(req, res, next) {
   if(!req.session.user) res.redirect('/');
@@ -50,6 +52,11 @@ router.post('/rename', function(req, res, next){
 });
 
 router.get('/auth/github', function(req, res, next){
+  dotenv.load();
+  var username = process.env.GITHUB_USERNAME;
+  var password = process.env.GITHUB_PASSWORD;
+  var clientId = process.env.GITHUB_CLIENT_ID;
+  var clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
   var fileName = req.query.fileName
   var content = req.query.content
@@ -60,21 +67,19 @@ router.get('/auth/github', function(req, res, next){
     headers: {
       "user-agent": "LiveCode"
     }
-    // Promise: require('bluebird'),
-    // timeout: 5000
   });
   
   github.authenticate({
     type: "basic",
-    username: '*',
-    password: '*'
+    username: username,
+    password: password
     });
   
   github.authorization.create({
     scopes:["user","gist"],
     note: "LiveCode post to Gist",
-    client_id: '*',
-    client_secret: '*',
+    client_id: clientId,
+    client_secret: clientSecret,
     headers: {
       "user-agent": "LiveCode"
     }
