@@ -31,6 +31,7 @@ $(".documentTitle").on("keypress", function(e){
   }else{
     console.log("Nothing registered");
   }
+});
 
 $('.button-save-document').on('click', function(){
   var content = editor.getValue().toString();
@@ -48,8 +49,7 @@ $('.chat-input').on('keypress', function(e){
     emitChatEvent(commentText);
     $(this).val('')
   }
-
-})
+});
 
 function addChatComment(data){
   var $chatCommentNode = $('<div>').addClass('chat-comment')

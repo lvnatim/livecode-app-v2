@@ -97,7 +97,7 @@ $(".githublink").on('click', function(){
         githubLink.text(originalText);
       }, 5000);
     }
-  })
+  });
 });
 
 $(".profileDocumentTitle").on("keypress", function(e){

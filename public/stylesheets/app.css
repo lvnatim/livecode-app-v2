@@ -1,0 +1,59 @@
+.app {
+  margin-top: 60px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.block {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: 1s;
+}
+
+.block.hidden {
+  left: 100%;
+}
+
+.block-body {
+  position: absolute;
+  top: 5%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.toolbar {
+  background-color: #2d2626;
+  position: absolute;
+  top: 0%;
+  bottom: 95%;
+  left: 0%;
+  right: 0%;
+  color: white;
+  z-index: 10;
+}
+
+.toolbar > div {
+  display: inline-block;
+  margin-top: 3px;
+  padding: 0px 30px;
+}
+
+.toolbar > div:hover {
+  background-color: white;
+  color: black;
+}
+
+.toolbar > div > p {
+  line-height: 47px;
+  margin: 0px;
+}

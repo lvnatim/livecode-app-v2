@@ -56,17 +56,12 @@ block content
         p= "Created on: "
           span.created= moment(documentCreatedAt).format('MMM Do YYYY')
         p= "Last updated: "
-<<<<<<< HEAD
-          span.documentUpdatedAt
+          span.updated= moment(documentUpdatedAt).format('MMM Do YYYY [at] h:mm:ss a')
         .chat
           .chat-comments
           input.chat-input(placeholder="Enter a chat comment here")
           div.chat-submit
-=======
-          span.updated= moment(documentUpdatedAt).format('MMM Do YYYY [at] h:mm:ss a')
         a.button.githublink= "Copy file to a new Gist"
-
->>>>>>> e83f8e216086da791933a2399a7ad18fca5f1c50
 
       .editors.hidden
         h4= "Add Editors"
