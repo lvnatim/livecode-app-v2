@@ -66,9 +66,40 @@ block content
       .toolbar.toolbar-profile
         div.close-block-profile
           p= "v"
-      .row
+      .row.profile-body
         .profile-details.four.columns
+          div.profile-image
+            img(src="http://jasonsvoices.com/funnyguy/wp-content/uploads/2016/03/Liam-Neeson.jpg")
+          .profile-info
+            h1= "Liam Neeson"
+            h2= "SpecialSkills24"
+            p= "Vancouver"
+            p= "liamneeson@willfind.net"
+            br
+            p= "about me"
+            br
+            p= " I don't know who you are. I don't know what you want. If you are looking for ransom, I can tell you I don't have money. But what I do have are a very particular set of skills, skills I have acquired over a very long career. Skills that make me a nightmare for people like you. If you let my daughter go now, that'll be the end of it. I will not look for you, I will not pursue you. But if you don't, I will look for you, I will find you, and I will kill you."
+            p= "more info - hidden"
         .profile-documents.eight.columns
+          .table
+            table
+              thead
+              tr
+                th= "Owner"
+                th= "Name"
+                th= "Language"
+                th= "Created At"
+                th= "Last Updated"
+                th
+              tbody.documents
+                each doc in docs
+                  tr.document(data-document-id= doc.id)
+                    td= doc.Owner.username
+                    td= doc.name
+                    td= doc.language
+                    td= doc.createdAt
+                    td= doc.updatedAt
+                    td.button-load-document-profile= "open"
 
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/javascripts/socket.js")
