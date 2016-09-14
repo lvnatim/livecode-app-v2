@@ -2,7 +2,7 @@ extends layout
 
 block content
   .app
-  
+
     .block.block-document
       .toolbar.toolbar-document
         div.button-new-document
@@ -13,6 +13,7 @@ block content
           p= "Users"
         div.button-browse-documents
           p= "Documents"
+
       div.table-container
         table
           thead
@@ -36,9 +37,11 @@ block content
     .block.block-editor
       .toolbar.toolbar-editor
         div.close-block-document
-          p= "<"
+          p= ">"
         div.button-save-document
           p="Save"
+        div.button-open-editor
+          p="Editors"
       #editor
       .sidebar
         h4= "Info"
@@ -52,23 +55,34 @@ block content
           span.documentCreatedAt
         p= "Last updated: "
           span.documentUpdatedAt
+        .chat
+          .chat-comments
+          input.chat-input(placeholder="Enter a chat comment here")
+          div.chat-submit
 
-        h4= "Editors"
+      .editors.hidden
+        h4= "Add Editors"
         ul.editorList
         input.searchUsers(placeholder="Search Users")
         ul.foundUsers
 
-        .chat
-          .chat-comments
-          input.chat-input(placeholder="Enter a chat comment here")
-
-    .block.block-profile
+    .block.block-profile.hidden
       .toolbar.toolbar-profile
         div.close-block-profile
-          p= "v"
+          p= ">"
       .row
         .profile-details.four.columns
         .profile-documents.eight.columns
+
+    .block.block-users.hidden
+      .toolbar.toolbar-users
+        div.close-block-users
+          p= ">"
+
+    .block.block-docs.hidden
+      .toolbar.toolbar-docs
+        div.close-block-docs
+          p= ">"
 
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/javascripts/socket.js")

@@ -2,9 +2,13 @@ var editor = ace.edit("editor");
 var editSession = editor.getSession();
 var Range = ace.require('ace/range').Range;
 
-editor.setTheme('ace/theme/dreamweaver');
+editor.setTheme('ace/theme/terminal');
 editSession.setMode('ace/mode/javascript');
 editor.$blockScrolling = Infinity;
+
+$('.button-open-editor').on('click', function(){
+  $('.editors').toggleClass('hidden');
+});
 
 $('.button-save-document').on('click', function(){
   var content = editor.getValue().toString();

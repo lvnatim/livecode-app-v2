@@ -1,10 +1,15 @@
 .block-profile {
   background-color: white;
   position: absolute;
-  top: 100%;
-  bottom: -100%;
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
+  transition: 1s;
+}
+
+.block-profile.hidden {
+  left: 100%;
 }
 
 .profile-details{

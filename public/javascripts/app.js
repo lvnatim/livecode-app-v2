@@ -8,7 +8,15 @@ $(".button-new-document").on('click', function(){
 });
 
 $('.button-show-profile').on('click', function(){
-  $('.block-profile').animate({"top":"0", "bottom":"0"});
+  $('.block-profile').toggleClass('hidden');
+});
+
+$('.button-browse-users').on('click', function(){
+  $('.block-users').toggleClass('hidden');
+});
+
+$('.button-browse-documents').on('click', function(){
+  $('.block-docs').toggleClass('hidden');
 });
 
 $("table").on('click', ".button-delete-document", function(){
@@ -39,6 +47,14 @@ $(".close-block-document").on('click', function(){
   $(".block-document").animate({"right":"0%","left":"0%"})
   stopSocket();
 });
+
+$('.close-block-users').on('click', function(){
+  $('.block-users').toggleClass('hidden');
+});
+
+$('.close-block-docs').on('click', function(){
+  $('.block-docs').toggleClass('hidden');
+})
 
 function createDocumentRow(doc){
   $newRow = $('<tr>')
