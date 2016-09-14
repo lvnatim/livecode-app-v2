@@ -10,6 +10,28 @@ $('.button-open-editor').on('click', function(){
   $('.editors').toggleClass('hidden');
 });
 
+$(".documentTitle").on("keypress", function(e){
+  var thisDoc = $(this);
+  var newTitle = thisDoc.html();
+  if(e.keyCode === 13){
+    e.preventDefault();
+    thisDoc.next().focus();
+    $.ajax({
+      method: 'POST',
+      url: '/app/rename/',
+      data: {
+        newTitle: newTitle
+      },
+      success: function(data){
+        console.log('Successfully posted');
+        thisDoc.blur().next().focus();
+        return false;
+      }
+    })
+  }else{
+    console.log("Nothing registered");
+  }
+
 $('.button-save-document').on('click', function(){
   var content = editor.getValue().toString();
   $.ajax({

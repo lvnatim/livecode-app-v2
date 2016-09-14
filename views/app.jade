@@ -23,14 +23,16 @@ block content
               td= "Language"
               td= "Created At"
               td= "Last Updated"
+              td=""
+              td=""
           tbody.documents
             each doc in docs
               tr.document(data-document-id= doc.id)
                 td= doc.Owner.username
-                td= doc.name
+                td.profileDocumentTitle(contentEditable="true")= doc.name
                 td= doc.language
-                td= doc.createdAt
-                td= doc.updatedAt
+                td= moment(doc.createdAt).format('MMM Do YYYY')
+                td= moment(doc.updatedAt).format('MMM Do YYYY [at] h:mm:ss a')
                 td.button-load-document= "open"
                 td.button-delete-document= "delete"
 
@@ -46,19 +48,25 @@ block content
       .sidebar
         h4= "Info"
         p= "Title: "
-          span.documentTitle
+          span.documentTitle(contentEditable="true")
         p= "Owner: "
           span.documentOwner
         p= "Language: "
           span.documentLanguage
         p= "Created on: "
-          span.documentCreatedAt
+          span.created= moment(documentCreatedAt).format('MMM Do YYYY')
         p= "Last updated: "
+<<<<<<< HEAD
           span.documentUpdatedAt
         .chat
           .chat-comments
           input.chat-input(placeholder="Enter a chat comment here")
           div.chat-submit
+=======
+          span.updated= moment(documentUpdatedAt).format('MMM Do YYYY [at] h:mm:ss a')
+        a.button.githublink= "Copy file to a new Gist"
+
+>>>>>>> e83f8e216086da791933a2399a7ad18fca5f1c50
 
       .editors.hidden
         h4= "Add Editors"
