@@ -2,8 +2,8 @@ var express = require('express');
 var db = require('../models/index');
 var router = express.Router();
 var moment = require('moment');
-var dotenv = require('dotenv');
 var GitHubApi = require('github');
+var dotenv = require('dotenv');
 
 
 router.get('/', function(req, res, next) {
