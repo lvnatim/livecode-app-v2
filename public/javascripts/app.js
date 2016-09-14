@@ -39,6 +39,22 @@ $(".close-block-document").on('click', function(){
   $(".block-document").animate({"right":"0%","left":"0%"})
   stopSocket();
 });
+$(".githublink").on('click', function(){
+  var fileName = $(".mainDocumentTitle").html();
+  var content = editor.getValue();  
+  $.ajax({
+    method: 'get',
+    url: '/app/auth/github',
+    data: {fileName: fileName, content: content},
+    success: function(){
+      $(".githublink").text('New Gist file created! Click to create another');
+
+    },
+    error: function(){
+      console.log('failed to do ajax request')
+    }
+  })
+});
 
 $(".profileDocumentTitle").on("keypress", function(e){
   var thisDoc = $(this);
