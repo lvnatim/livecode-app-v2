@@ -22,10 +22,30 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/profile', function(req, res, next) {
+  var userId = req.session.user.id;
+  db.User
+    .findById(userId,{
+      attributes: ["id", "username", "email","firstName", "lastName"], 
+      include: [db.Document, db.Profile]
+    })
+    .then(user=>{
+      res.send(user);
+    })
+    .catch(err=>{
+      res.sendStatus(404);
+    });
+})
+
 router.post('/register', function(req, res, next) {
   db.User
     .create(req.body)
     .then(user=>{
+      db.Profile
+        .create()
+        .then(profile=>{
+          user.setProfile(profile);
+        })
       res.sendStatus(200);
     })
     .catch(err=>{

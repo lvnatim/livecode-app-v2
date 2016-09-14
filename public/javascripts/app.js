@@ -1,4 +1,4 @@
-$(".button-new-document").on('click', function(){
+$(".button-new-mydoc").on('click', function(){
   $.get({
     url: '/api/documents/new',
     success: function(data){
@@ -9,6 +9,12 @@ $(".button-new-document").on('click', function(){
 
 $('.button-show-profile').on('click', function(){
   $('.block-profile').toggleClass('hidden');
+
+  $.get({
+    url: 'api/users/profile',
+    success: loadProfile
+  });
+
 });
 
 $('.button-browse-users').on('click', function(){
@@ -35,7 +41,7 @@ $("table").on('click', ".button-delete-document", function(){
 
 $("table").on('click', '.button-load-document', function(){
   var docId = $(this).parent().data('documentId');
-  $(".block-document").animate({"right":"100%","left":"-100%"});
+  $('.block-editor').toggleClass("hidden");
   $.get({
     url: "/api/documents",
     data: {docId: docId},
@@ -57,7 +63,7 @@ $("table").on('click', '.button-load-document-profile', function(){
 });
 
 $(".close-block-document").on('click', function(){
-  $(".block-document").animate({"right":"0%","left":"0%"})
+  $('.block-editor').toggleClass("hidden");
   stopSocket();
 });
 

@@ -1,3 +1,8 @@
+.block-editor {
+  background-color: white;
+  z-index: 10;
+}
+
 .chat {
   border: 2px solid grey;
   height: 50%;
@@ -32,10 +37,6 @@
 .chat-submit {
   width: 20%;
 }
-/*
-.chat-input:focus {
-  outline: none;
-}*/
 
 #editor {
   position: absolute;
@@ -61,7 +62,7 @@
 }
 
 .editors.hidden {
-  margin-left: -1000px;
+  margin-left: 2000px;
 }
 
 .editorList {
@@ -101,5 +102,5 @@
 }
 
 .toolbar-editor {
-  z-index: -1;
+  z-index: 10;
 }
