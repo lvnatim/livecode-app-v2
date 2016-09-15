@@ -7,6 +7,51 @@
   background-color: #33c3f0;
 }
 
+.my-profile-details {
+  position: absolute;
+  top:0%;
+  left: 0%;
+  right: 70%;
+  bottom: 0%;
+}
+
+.my-profile-image > img {
+  box-sizing: border-box;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  overflow: hidden;
+  height: auto;
+  padding:15px;
+}
+
+.my-profile-info:last-child{
+  margin-bottom: 15px;
+}
+
+.my-profile-info > * {
+  color: black;
+  margin: 0 15px;
+}
+
+.my-profile-info > h1{
+  font-size: 20px;
+  text-align: center;
+}
+
+.my-profile-info > h2{
+ font-size: 18px;
+ text-align: center;
+}
+
+.mydocs {
+  position: absolute;
+  top:0%;
+  left: 30%;
+  right: 0%;
+  bottom: 0%;
+}
+
 .toolbar-mydocs {
   z-index: 1;
 }

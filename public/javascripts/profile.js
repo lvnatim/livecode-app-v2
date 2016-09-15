@@ -6,7 +6,7 @@ function createProfileDocumentRow(doc){
   $newRow = $('<tr>')
     .attr("data-document-id", doc.id)
     .addClass("document");
-  $('<td>').text("tempname").appendTo($newRow);
+  $('<td>').text(doc.Owner.username).appendTo($newRow);
   $('<td>').text(doc.name).appendTo($newRow);
   $('<td>').text(doc.language).appendTo($newRow);
   $('<td>').text(doc.updatedAt).appendTo($newRow);

@@ -23,11 +23,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/profile', function(req, res, next) {
-  var userId = req.session.user.id;
+  var userId;
+  if(req.query.userId){
+    userId = req.query.userId;
+  } else {
+    userId = req.session.user.id;
+  }
   db.User
     .findById(userId,{
       attributes: ["id", "username", "email","firstName", "lastName"], 
-      include: [db.Document, db.Profile]
+      include: [{model: db.Document, include: [{model: db.User, as: "Owner"}]}, db.Profile]
     })
     .then(user=>{
       res.send(user);
@@ -38,9 +43,8 @@ router.get('/profile', function(req, res, next) {
 })
 
 router.get('/profiles', function(req, res, next) {
-  var userId = req.session.user.id;
   db.User
-    .findByAll(userId,{
+    .findAll({
       attributes: ["id", "username", "email","firstName", "lastName"], 
       include: [db.Document, db.Profile],
       where:{
@@ -60,7 +64,9 @@ router.get('/profiles', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
   db.User
-    .create(req.body)
+    .create(
+      req.body
+    )
     .then(user=>{
       db.Profile
         .create()
@@ -78,7 +84,10 @@ router.post('/login', function(req, res, next) {
   db.User
     .findOne(
       {
-        where: req.body,
+        where: {
+          username: req.body.username,
+          password: req.body.password
+        },
         attributes: ["id", "username"]
       }
     )
@@ -91,6 +100,13 @@ router.post('/login', function(req, res, next) {
     .catch(err=>{
       res.sendStatus(404);
     })
+});
+
+router.get('/logout', function(req, res, next) {
+  req.session.user = null;
+  if(!req.session.user){
+    res.sendStatus(200);
+  }
 });
 
 module.exports = router;

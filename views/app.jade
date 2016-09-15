@@ -2,39 +2,61 @@ extends layout
 
 block content
   .app
-
+  
     .block.block-mydocs
       .toolbar.toolbar-mydocs
         div.button-new-mydoc
           p= "New"
-        div.button-show-profile
-          p= "Profile"
         div.button-browse-users
           p= "Users"
-        div.button-browse-documents
-          p= "Documents"
+        div.logout
+          p= "Logout"
 
       .block-body.block-body-mydocs
-        table
-          thead
-            tr
-              td= "Owner"
-              td= "Name"
-              td= "Language"
-              td= "Created At"
-              td= "Last Updated"
-              td=""
-              td=""
-          tbody.documents
-            each doc in docs
-              tr.document(data-document-id= doc.id)
-                td= doc.Owner.username
-                td.profileDocumentTitle(contentEditable="true")= doc.name
-                td= doc.language
-                td= moment(doc.createdAt).format('MMM Do YYYY')
-                td= moment(doc.updatedAt).format('MMM Do YYYY [at] h:mm:ss a')
-                td.button-load-document= "open"
-                td.button-delete-document= "delete"
+        .my-profile-details
+          .my-profile-image
+            img(src="http://jasonsvoices.com/funnyguy/wp-content/uploads/2016/03/Liam-Neeson.jpg")
+          .my-profile-info
+            h1.my-profile-fullname
+              span= user.firstName
+              span= " "
+              span= user.lastName
+            h2.my-profile-username= user.username
+            div.icon-container
+              i.fa.fa-envelope-o
+              span.my-profile-email= user.email
+            div.icon-container
+              i.fa.fa-code
+              span= user.Profile.language || "No language provided."
+            div.icon-container
+              i.fa.fa-map-marker
+              span.my-profile-location= user.Profile.location || "No location provided."
+            br
+            p.my-profile-bio= user.Profile.bio || "No biography provided."
+        .mydocs
+          table
+            thead
+              tr
+                td= "Owner"
+                td= "Name"
+                td= "Language"
+                td= "Created At"
+                td= "Last Updated"
+                td=""
+                td=""
+            tbody.documents
+              h3="My Owned Documents"
+              each doc in docs
+                tr.document(data-document-id= doc.id)
+                  td= doc.Owner.username
+                  td= doc.name
+                  td= doc.language
+                  td= moment(doc.createdAt).format('MMM Do YYYY')
+                  td= moment(doc.updatedAt).format('MMM Do YYYY [at] h:mm:ss a')
+                  td.button-load-document= "open"
+                  td.button-delete-document= "delete"
+            tbody.other-documents
+
 
     .block.block-editor.hidden
       .toolbar.toolbar-editor
@@ -44,19 +66,42 @@ block content
           p="Save"
         div.button-open-editor
           p="Editors"
+        div
+          span= "Created on: "
+          span.created= moment(documentCreatedAt).format('MMM Do YYYY')
+        div
+          span= "Last Updated: "
+          span.updated= moment(documentUpdatedAt).format('MMM Do YYYY [at] h:mm:ss a')
       #editor
       .sidebar
-        h4= "Info"
-        p= "Title: "
-          span.documentTitle(contentEditable="true")
-        p= "Owner: "
-          span.documentOwner
+        h4
+          span.documentTitle(contentEditable= "true")
+          small
+            span= " - "
+            span.documentOwner
         p= "Language: "
-          span.documentLanguage
-        p= "Created on: "
-          span.created= moment(documentCreatedAt).format('MMM Do YYYY')
-        p= "Last updated: "
-          span.updated= moment(documentUpdatedAt).format('MMM Do YYYY [at] h:mm:ss a')
+          span
+            select.language-select
+              option(value="c_cpp")= "C/C++"
+              option(value="csharp")= "C#"
+              option(value="coffee")= "CoffeeScript"
+              option(value="css")= "CSS"
+              option(value="django")= "Django"
+              option(value="html_ruby")= "ERB"
+              option(value="jade")= "Jade"
+              option(value="java")= "Java"
+              option(value="javascript")= "Javascript"
+              option(value="json")= "JSON"
+              option(value="mysql")= "MYSQL"
+              option(value="objectivec")= "Objective-C"
+              option(value="perl")= "Perl"
+              option(value="plain_text")= "Plain Text"
+              option(value="python")= "Python"
+              option(value="r")= "R"
+              option(value="ruby")= "Ruby"
+              option(value="scss")= "SCSS"
+              option(value="sql")= "SQL"
+              option(value="html")= "HTML"
         .chat
           .chat-comments
           input.chat-input(placeholder="Enter a chat comment here")
@@ -80,13 +125,22 @@ block content
           .profile-info
             h1.profile-fullname= "Liam Neeson"
             h2.profile-username= "SpecialSkills24"
-            p.profile-location= "Vancouver"
-            p.profile-email= "liamneeson@willfind.net"
-            br
-            p= "about me"
-            br
+            div.icon-container
+              i.fa.fa-map-marker
+              span.profile-location= "Vancouver"
+            div.icon-container
+              i.fa.fa-envelope-o
+              span.profile-email= "liamneeson@willfind.net"
+            div.icon-container
+              i.fa.fa-clock-o
+              span= "joined 5 years ago"
+            div.icon-container
+              i.fa.fa-code
+              span= "___ characters inputted"
+            div.icon-container
+              i.fa.fa-user
+              span= "about me"
             p.profile-bio= " I don't know who you are. I don't know what you want. If you are looking for ransom, I can tell you I don't have money. But what I do have are a very particular set of skills, skills I have acquired over a very long career. Skills that make me a nightmare for people like you. If you let my daughter go now, that'll be the end of it. I will not look for you, I will not pursue you. But if you don't, I will look for you, I will find you, and I will kill you."
-            p= "more info - hidden"
         .profile-table
           .table
             table
@@ -104,15 +158,8 @@ block content
         div.close-block-users
           p= ">"
       .block-body.block-body-users
-        input.search(placeholder="Search Profiles")
+        input.search-user-profiles(placeholder="Search Profiles")
         .user-profiles
-          .user-profile
-          .user-profile
-          .user-profile
-          .user-profile
-          .user-profile
-          .user-profile
-          .user-profile
     .block.block-docs.hidden
       .toolbar.toolbar-docs
         div.close-block-docs
@@ -124,4 +171,8 @@ block content
   script(src="/plugins/ace-builds/src/ace.js")
   script(src="/javascripts/user_search.js")
   script(src="/javascripts/app.js")
+
   script(src="/javascripts/editor.js")
+  
+  
+

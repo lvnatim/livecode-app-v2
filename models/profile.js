@@ -6,6 +6,9 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },
+    language: {
+      type: DataTypes.STRING
+    },
     bio: {
       type: DataTypes.STRING
     },

@@ -15,21 +15,17 @@ $(".documentTitle").on("keypress", function(e){
   var newTitle = thisDoc.html();
   if(e.keyCode === 13){
     e.preventDefault();
-    thisDoc.next().focus();
     $.ajax({
-      method: 'POST',
-      url: '/app/rename/',
+      method: 'PUT',
+      url: '/api/documents/',
       data: {
-        newTitle: newTitle
+        name: newTitle
       },
-      success: function(data){
+      success: function(){
         console.log('Successfully posted');
         thisDoc.blur().next().focus();
-        return false;
       }
     })
-  }else{
-    console.log("Nothing registered");
   }
 });
 
@@ -49,6 +45,17 @@ $('.chat-input').on('keypress', function(e){
     emitChatEvent(commentText);
     $(this).val('')
   }
+});
+
+$('.language-select').on("change", function(){
+  var lang = $(this).val();
+  $.ajax({
+    url: '/api/documents',
+    method: 'put',
+    data: {language: lang},
+    success: console.log
+  })
+  setDocumentLanguage(lang);
 });
 
 function addChatComment(data){
@@ -93,7 +100,12 @@ function loadDocument(doc){
 function loadDocumentMeta(doc){
   $('.documentTitle').text(doc.name);
   $('.documentOwner').text(doc.Owner.username);
-  $('.documentLanguage').text(doc.language);
+  $('.language-select').val(doc.language);
   $('.documentCreatedAt').text(doc.createdAt);
   $('.documentUpdatedAt').text(doc.updatedAt);
+}
+
+function setDocumentLanguage(lang){
+  var filePath = 'ace/mode/' + lang;
+  editSession.setMode(filePath);
 }

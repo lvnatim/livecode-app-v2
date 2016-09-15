@@ -1,3 +1,5 @@
+// USER SEARCH FOR EDITORS
+
 $('.editorList').on('click', '.removeEditor', function(){
   var userId = $(this).data("userId");
   var $nodeParent = $(this).parent();
@@ -47,3 +49,54 @@ function createFoundUsers(userArray){
       .appendTo($('.foundUsers'));
   });
 }
+
+// USER SEARCH FOR PROFILES
+
+function createFoundProfiles(userArray){
+  $(".user-profiles").empty();
+  console.log(userArray);
+
+  userArray.forEach(user=>{
+    var $profileNode = $('<div>')
+      .addClass("user-profile")
+      .attr("data-user-id", user.id);
+    
+    $("<h3>")
+      .text(user.firstName + " " + user.lastName)
+      .appendTo($profileNode);
+
+    $("<p>")
+      .text("(" + user.username + ")")  
+      .appendTo($profileNode);
+
+    $("<p>")
+      .text("Preferred Language: Javascript")
+      .appendTo($profileNode);  
+
+    $profileNode.appendTo($(".user-profiles"));
+  });
+}
+
+$('.search-user-profiles').on('keyup',function(e){
+  var value = $(this).val() + '%';
+  if(value === "%"){
+  } else {
+    $.ajax({
+      url: '/api/users/profiles',
+      method: 'get',
+      data: {username: value},
+      success: createFoundProfiles,
+      error: function(){}
+    });
+  }
+});
+
+$('.block-users').on('click', '.user-profile' ,function(){
+  var userId = $(this).data("userId")
+  $('.block-profile').toggleClass('hidden');
+  $.get({
+    url: 'api/users/profile',
+    data: {userId: userId},
+    success: loadProfile
+  });
+});

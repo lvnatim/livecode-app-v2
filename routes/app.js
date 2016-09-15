@@ -10,44 +10,25 @@ router.get('/', function(req, res, next) {
   if(!req.session.user) res.redirect('/');
   var userId = req.session.user.id;
   db.User
-    .findById(userId)
+    .findById(userId,{
+      attributes: ["username", "firstName", "lastName", "email", "id"],
+      include: [db.Profile]
+    })
     .then(user=>{
       user
         .getDocuments({
           include:[{
             model: db.User,
             as: "Owner",
-            attributes: ["username"]
+            attributes: ["username", "firstName", "lastName", "email", "id"]
           }]
         })
         .then(function(docs){
-          res.render('app', {docs: docs, user: req.session.user, moment: moment});
+          res.render('app', {docs: docs, user: user, moment: moment});
         });
     })
     .catch(function(err){
       res.render('app', {docs: [], user: req.session.user});
-  });
-});
-
-router.post('/rename', function(req, res, next){
-  var title = req.body
-  var docId = title.docId || req.session.activeDocId
-  db.Document
-  .findById(docId)
-  .then(function(doc){
-    if (doc.OwnerId === req.session.user.id){
-      doc.updateAttributes({
-        name: title.newTitle
-      })
-    }else{
-      console.log("Only owners can edit title")
-    }
-  })
-  .then(function(){
-    res.sendStatus(200);
-  })
-  .catch(function(err){
-    res.sendStatus(500);
   });
 });
 
