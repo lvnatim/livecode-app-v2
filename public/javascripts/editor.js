@@ -23,6 +23,7 @@ $(".documentTitle").on("keypress", function(e){
       },
       success: function(){
         console.log('Successfully posted');
+        thisDoc.blur().next().focus();
       }
     })
   }

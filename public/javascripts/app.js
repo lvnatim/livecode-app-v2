@@ -142,7 +142,7 @@ function createDocumentRow(doc){
     .attr("data-document-id", doc.doc.id)
     .addClass("document");
   $('<td>').text(doc.user.username).appendTo($newRow);
-  $('<td contenteditable="true">').text(doc.doc.name).appendTo($newRow).addClass('profileDocumentTitle');
+  $('<td>').text(doc.doc.name).appendTo($newRow).addClass('profileDocumentTitle');
   $('<td>').text(doc.doc.language).appendTo($newRow);
   $('<td>').text(doc.createdate).appendTo($newRow);
   $('<td>').text(doc.updateddate).appendTo($newRow);
