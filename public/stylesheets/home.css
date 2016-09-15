@@ -10,6 +10,25 @@
   font-family: Futura;
 }
 
+.blurb.container {
+  margin-top: 33px;
+}
+
+.first-blurb-icons > * {
+    margin: 30px;
+    margin-top: 25px;
+    padding-top: 50px;
+  }
+
+.second-blurb-icons > * {
+    display: inline-block;
+    margin: 30px;
+    margin-top: 10px;
+    padding-top: 50px;
+    padding-left: 22px;
+    padding-bottom: 15px;
+}
+
 .hero {
   align-items: center;
   border: 2px solid black;

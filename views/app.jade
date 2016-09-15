@@ -102,16 +102,17 @@ block content
               option(value="scss")= "SCSS"
               option(value="sql")= "SQL"
               option(value="html")= "HTML"
+        a.button.githublink= "Copy file to a new Gist   "
+          i.fa.fa-github.fa-1.5x
         .chat
           .chat-comments
-          input.chat-input(placeholder="Enter a chat comment here")
           div.chat-submit
-        a.button.githublink= "Copy file to a new Gist"
+        input.chat-input(placeholder="Enter a chat comment here")
 
       .editors.hidden
-        h4= "Add Editors"
+        h4= "Editors"
         ul.editorList
-        input.searchUsers(placeholder="Search Users")
+        input.searchUsers(placeholder="Add new editor")
         ul.foundUsers
 
     .block.block-profile.hidden
