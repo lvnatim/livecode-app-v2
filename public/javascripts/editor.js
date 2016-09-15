@@ -28,8 +28,6 @@ $(".documentTitle").on("keypress", function(e){
         return false;
       }
     })
-  }else{
-    console.log("Nothing registered");
   }
 });
 
@@ -49,6 +47,11 @@ $('.chat-input').on('keypress', function(e){
     emitChatEvent(commentText);
     $(this).val('')
   }
+});
+
+$('.language-select').on("change", function(){
+  var lang = $(this).val();
+  setDocumentLanguage(lang);
 });
 
 function addChatComment(data){
@@ -96,4 +99,9 @@ function loadDocumentMeta(doc){
   $('.documentLanguage').text(doc.language);
   $('.documentCreatedAt').text(doc.createdAt);
   $('.documentUpdatedAt').text(doc.updatedAt);
+}
+
+function setDocumentLanguage(lang){
+  var filePath = 'ace/mode/' + lang;
+  editSession.setMode(filePath);
 }

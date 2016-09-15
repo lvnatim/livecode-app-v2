@@ -6,6 +6,7 @@
   left: 0;
   right: 0;
   transition: 1s;
+  z-index: 10;
 }
 
 .block-profile.hidden {
@@ -62,11 +63,6 @@
  text-align: center;
 }
 
-.profile-popular{
-  background-color: black;
-  height: 100px;
-}
-
 .table * {
   text-align: center;
 }
@@ -80,5 +76,5 @@
 }
 
 .toolbar-profile {
-  z-index: 5;
+  z-index: 10;
 }

@@ -10,18 +10,20 @@ router.get('/', function(req, res, next) {
   if(!req.session.user) res.redirect('/');
   var userId = req.session.user.id;
   db.User
-    .findById(userId)
+    .findById(userId,{
+      attributes: ["username", "firstName", "lastName", "email", "id"]
+    })
     .then(user=>{
       user
         .getDocuments({
           include:[{
             model: db.User,
             as: "Owner",
-            attributes: ["username"]
+            attributes: ["username", "firstName", "lastName", "email", "id"]
           }]
         })
         .then(function(docs){
-          res.render('app', {docs: docs, user: req.session.user, moment: moment});
+          res.render('app', {docs: docs, user: user, moment: moment});
         });
     })
     .catch(function(err){

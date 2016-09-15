@@ -23,7 +23,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/profile', function(req, res, next) {
-  var userId = req.session.user.id;
+  var userId;
+  if(req.query.userId){
+    userId = req.query.userId;
+  } else {
+    userId = req.session.user.id;
+  }
   db.User
     .findById(userId,{
       attributes: ["id", "username", "email","firstName", "lastName"], 
@@ -38,9 +43,8 @@ router.get('/profile', function(req, res, next) {
 })
 
 router.get('/profiles', function(req, res, next) {
-  var userId = req.session.user.id;
   db.User
-    .findByAll(userId,{
+    .findAll({
       attributes: ["id", "username", "email","firstName", "lastName"], 
       include: [db.Document, db.Profile],
       where:{
@@ -91,6 +95,13 @@ router.post('/login', function(req, res, next) {
     .catch(err=>{
       res.sendStatus(404);
     })
+});
+
+router.get('/logout', function(req, res, next) {
+  req.session.user = null;
+  if(!req.session.user){
+    res.sendStatus(200);
+  }
 });
 
 module.exports = router;

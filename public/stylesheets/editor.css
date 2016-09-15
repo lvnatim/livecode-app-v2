@@ -1,6 +1,6 @@
 .block-editor {
   background-color: white;
-  z-index: 10;
+  z-index: 15;
 }
 
 .chat {
@@ -63,7 +63,7 @@
 }
 
 .editors.hidden {
-  margin-left: 2000px;
+  margin-left: 10000px;
 }
 
 .editorList {
@@ -103,5 +103,5 @@
 }
 
 .toolbar-editor {
-  z-index: 10;
+  z-index: 15;
 }

@@ -9,12 +9,10 @@ $(".button-new-mydoc").on('click', function(){
 
 $('.button-show-profile').on('click', function(){
   $('.block-profile').toggleClass('hidden');
-
   $.get({
     url: 'api/users/profile',
     success: loadProfile
   });
-
 });
 
 $('.button-browse-users').on('click', function(){
@@ -23,6 +21,13 @@ $('.button-browse-users').on('click', function(){
 
 $('.button-browse-documents').on('click', function(){
   $('.block-docs').toggleClass('hidden');
+});
+
+$('.logout').on('click', function(){
+  $.get({
+    url: 'api/users/logout',
+    success: function(){window.location.href = '/'} 
+  })
 });
 
 $("table").on('click', ".button-delete-document", function(){
