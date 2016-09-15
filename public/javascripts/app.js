@@ -97,9 +97,10 @@ $(".githublink").on('click', function(){
     url: '/app/auth/github',
     data: {fileName: fileName, content: content},
     success: function(){
-      githubLink.text('New Gist created! Click to create another');
+      githubLink.text('New Gist created!');
       setTimeout(function(){
         githubLink.text(originalText);
+        githubLink.append('<i class="fa fa-github fa-1.5x"></i>')
       }, 5000);
     },
     error: function(){

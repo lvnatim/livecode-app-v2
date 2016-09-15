@@ -4,14 +4,17 @@
 }
 
 .chat {
-  border: 2px solid grey;
+  background-color:#efeef1; 
+  border: 1px solid grey;
   height: 50%;
-  position: absolute;
-  bottom: 2.5%;
+  bottom: 10%;
   right: 0;
   left: 0;
-  width: 80%;
+  width: 100%;
+  max-height: 100%;
   margin: 0 auto;
+  overflow: auto;
+  border-radius: 5px 5px 0 0;
 }
 
 .chat-comments{
@@ -21,17 +24,20 @@
 }
 
 .chat-comment {
-  background-color: grey;
-  border: 1px solid grey;
+  padding-left: 5px;
   display: block;
   max-width: inherit;
 }
 
 .chat-input{
+  background-color: #efeef1;
   border: 1px solid grey;
+  border-radius: 0 0 5px 5px;
   font-size: 1.5rem;
   height: 7.5%;
-  width: 80%;
+  margin-top: 0;
+  padding-left: 5px;
+  width: 98.1%;
 }
 
 .chat-submit {
@@ -49,17 +55,18 @@
 }
 
 .editors {
-  background-color: brown;
-  border: 1px solid black;
+  background: linear-gradient(#e8e8e8, #1f1c18);
   padding: 10px;
   position: absolute;
   height: 400px;
   width: 250px;
   top: 50%;
   left: 50%;
-  margin-top: -200px;
-  margin-left: -125px;
+  margin-top: -225px;
+  margin-left: -225px;
   transition: margin 1s;
+  border-radius: 5px;
+  text-align:center;
 }
 
 .editors.hidden {
@@ -75,15 +82,18 @@
 }
 
 .foundUsers {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 5px;
   list-style-type: none;
+  margin-top: 5px;
 }
 
 .foundUser:hover {
-  background-color: black;
+  background-color: rgba(0,0,0,0.15);
 }
 
 .searchUsers {
-  border-radius: 1rem;
+  border-radius: 5px;
   height: 3rem;
   width: 100%;
 }
