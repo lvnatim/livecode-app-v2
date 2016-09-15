@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     language: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 'javascript'
+      defaultValue: 'JavaScript'
     }
   }, {
     classMethods: {
