@@ -1,3 +1,7 @@
+table{
+  margin-right: 15px;
+}
+
 .block-profile {
   background-color: white;
   position: absolute;
@@ -6,6 +10,42 @@
   left: 0;
   right: 0;
   transition: 1s;
+}
+
+<<<<<<< HEAD
+.icon{
+  background-size: 100% 100%;
+  float: left;
+  margin: 0px;
+  height: 30px;
+  width: 30px;
+}
+
+.icon-container{
+  height: 30px;
+  line-height: 15px;
+}
+
+.icon-container > span{
+  display: inline-block;
+  padding-top: 16px;
+  margin-left: 20px;
+  line-height: 0;
+}
+
+.profile-body{
+  height: 700px;
+}
+
+.profile-details{
+  /*width: 31% !important;*/
+  background-color: white;
+  margin-bottom: 15px;
+  max-height: 700px;
+}
+
+.profile-documents{
+    
 }
 
 .block-profile.hidden {
@@ -50,6 +90,7 @@
 .profile-info > * {
   color: black;
   margin: 0 15px;
+  vertical-align: middle;
 }
 
 .profile-info > h1{
@@ -60,11 +101,6 @@
 .profile-info > h2{
  font-size: 18px;
  text-align: center;
-}
-
-.profile-popular{
-  background-color: black;
-  height: 100px;
 }
 
 .table * {

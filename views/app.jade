@@ -82,11 +82,22 @@ block content
             h2.profile-username= "SpecialSkills24"
             p.profile-location= "Vancouver"
             p.profile-email= "liamneeson@willfind.net"
-            br
-            p= "about me"
-            br
+            div.icon-container
+              i.fa.fa-map-marker
+              span.profile-location= "Vancouver"
+            div.icon-container
+              i.fa.fa-envelope-o
+              span.profile-email= "liamneeson@willfind.net"
+            div.icon-container
+              i.fa.fa-clock-o
+              span= "joined 5 years ago"
+            div.icon-container
+              i.fa.fa-code
+              span= "___ characters inputted"
+            div.icon-container
+              i.fa.fa-user
+              span= "about me"
             p.profile-bio= " I don't know who you are. I don't know what you want. If you are looking for ransom, I can tell you I don't have money. But what I do have are a very particular set of skills, skills I have acquired over a very long career. Skills that make me a nightmare for people like you. If you let my daughter go now, that'll be the end of it. I will not look for you, I will not pursue you. But if you don't, I will look for you, I will find you, and I will kill you."
-            p= "more info - hidden"
         .profile-table
           .table
             table
@@ -124,4 +135,8 @@ block content
   script(src="/plugins/ace-builds/src/ace.js")
   script(src="/javascripts/user_search.js")
   script(src="/javascripts/app.js")
+
   script(src="/javascripts/editor.js")
+  
+  
+
