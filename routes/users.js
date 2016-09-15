@@ -82,7 +82,10 @@ router.post('/login', function(req, res, next) {
   db.User
     .findOne(
       {
-        where: req.body,
+        where: {
+          username: req.body.username,
+          password: req.body.password
+        },
         attributes: ["id", "username"]
       }
     )
