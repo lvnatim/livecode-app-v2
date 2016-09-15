@@ -63,8 +63,15 @@ router.get('/profiles', function(req, res, next) {
 })
 
 router.post('/register', function(req, res, next) {
+  res.sendStatus(200);
   db.User
-    .create(req.body)
+    .create({
+      username: req.body.username,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: req.body.password,
+      email: email
+    })
     .then(user=>{
       db.Profile
         .create()
