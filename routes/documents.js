@@ -58,7 +58,8 @@ router.put('/', function(req, res, next) {
   db.Document
     .findById(docId)
     .then(doc=>{
-      doc.content = content;
+      doc.update(req.body);
+      // doc.content = content;
       doc.save()
         .then(doc=>res.sendStatus(200))
         .catch(err=>res.sendStatus(404));

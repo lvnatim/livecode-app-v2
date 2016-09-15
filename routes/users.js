@@ -32,7 +32,7 @@ router.get('/profile', function(req, res, next) {
   db.User
     .findById(userId,{
       attributes: ["id", "username", "email","firstName", "lastName"], 
-      include: [db.Document, db.Profile]
+      include: [{model: db.Document, include: [{model: db.User, as: "Owner"}]}, db.Profile]
     })
     .then(user=>{
       res.send(user);

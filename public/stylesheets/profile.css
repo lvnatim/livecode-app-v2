@@ -13,7 +13,6 @@ table{
   z-index: 10;
 }
 
-<<<<<<< HEAD
 .icon{
   background-size: 100% 100%;
   float: left;
@@ -39,7 +38,6 @@ table{
 }
 
 .profile-details{
-  /*width: 31% !important;*/
   background-color: white;
   margin-bottom: 15px;
   max-height: 700px;
