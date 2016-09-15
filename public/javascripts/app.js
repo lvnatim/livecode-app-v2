@@ -2,7 +2,14 @@ $(".button-new-mydoc").on('click', function(){
   $.get({
     url: '/api/documents/new',
     success: function(data){
-      createDocumentRow(data)
+      $('.block-editor').toggleClass("hidden");
+      console.log(data)
+      createDocumentRow(data);
+      $.get({
+        url: "/api/documents",
+        data: {docId: data.doc.id},
+        success: loadDocument
+      });
     }
   })
 });
@@ -100,7 +107,7 @@ $(".githublink").on('click', function(){
   });
 });
 
-$(".profileDocumentTitle").on("keypress", function(e){
+$("table").on("keypress", ".profileDocumentTitle", function(e){
   var thisDoc = $(this);
   var docId = thisDoc.parent().data("document-id");
   var newTitle = thisDoc.html();
@@ -127,13 +134,13 @@ $(".profileDocumentTitle").on("keypress", function(e){
 
 function createDocumentRow(doc){
   $newRow = $('<tr>')
-    .attr("data-document-id", doc.id)
+    .attr("data-document-id", doc.doc.id)
     .addClass("document");
-  $('<td>').text("tempname").appendTo($newRow);
-  $('<td>').text(doc.name).appendTo($newRow);
-  $('<td>').text(doc.language).appendTo($newRow);
-  $('<td>').text(doc.createdAt).appendTo($newRow);
-  $('<td>').text(doc.updatedAt).appendTo($newRow);
+  $('<td>').text(doc.user.username).appendTo($newRow);
+  $('<td contenteditable="true">').text(doc.doc.name).appendTo($newRow).addClass('profileDocumentTitle');
+  $('<td>').text(doc.doc.language).appendTo($newRow);
+  $('<td>').text(doc.createdate).appendTo($newRow);
+  $('<td>').text(doc.updateddate).appendTo($newRow);
   $('<td>').text("open")
     .addClass("button-load-document")
     .appendTo($newRow);
