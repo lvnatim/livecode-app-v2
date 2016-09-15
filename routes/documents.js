@@ -4,7 +4,7 @@ var router = express.Router();
 var moment = require('moment');
 
 // These are all API routes.
-
+//should be a post
 router.get('/new', function(req, res, next) {
   if(!req.session.user) res.sendStatus(404);
   var userId = req.session.user.id
@@ -17,7 +17,7 @@ router.get('/new', function(req, res, next) {
         .findById(userId)
         .then(user=>{
           doc.addUser(user);
-          res.send(doc);
+          res.json({doc: doc, user: user, createdate: moment(doc.createdAt).format('MMM Do YYYY'), updateddate: moment(doc.updatedAt).format('MMM Do YYYY [at] h:mm:ss a')});
         })
         .catch(err=>{
           res.sendStatus(404);
